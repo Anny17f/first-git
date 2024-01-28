@@ -1,0 +1,43 @@
+class DescriptiveStatistics {
+    constructor(data) {
+        this.data = data;
+    }
+
+    // Compute the mean
+    mean() {
+        let sum = this.data.reduce((a, b) => a + b, 0);
+        return sum / this.data.length;
+    }
+
+    // Compute the median
+    median() {
+        let sortedData = [...this.data].sort((a, b) => a - b);
+        let middleIndex = Math.floor(sortedData.length / 2);
+
+        // If the data length is even
+        if (sortedData.length % 2 === 0) {
+            return (sortedData[middleIndex - 1] + sortedData[middleIndex]) / 2;
+        } else { // If the data length is odd
+            return sortedData[middleIndex];
+        }
+    }
+
+    // Compute the mode
+    mode() {
+        let counts = {};
+        for (let num of this.data) {
+            counts[num] = (counts[num] || 0) + 1;
+        }
+
+        let maxCount = Math.max(...Object.values(counts));
+        let modes = Object.keys(counts).filter(num => counts[num] === maxCount);
+
+        return modes.length === 1 ? Number(modes[0]) : modes.map(Number);
+    }
+}
+
+// Usage
+let stats = new DescriptiveStatistics([1, 2, 2, 3, 4, 4, 4, 5]);
+console.log(`Mean: ${stats.mean()}`);
+console.log(`Median: ${stats.median()}`);
+console.log(`Mode: ${stats.mode()}`);
