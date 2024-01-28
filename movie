@@ -1,0 +1,44 @@
+class Movie {
+    constructor(title, availableCopies) {
+        this.title = title;
+        this.availableCopies = availableCopies;
+    }
+}
+
+class MovieStore {
+    constructor() {
+        this.movies = {};
+    }
+
+    addMovie(movie) {
+        this.movies[movie.title] = movie;
+    }
+
+    rentMovie(title) {
+        let movie = this.movies[title];
+        if (movie && movie.availableCopies > 0) {
+            movie.availableCopies--;
+            console.log(`You have successfully rented ${title}. Enjoy!`);
+        } else {
+            console.log(`Sorry, ${title} is currently unavailable.`);
+        }
+    }
+
+    returnMovie(title) {
+        let movie = this.movies[title];
+        if (movie) {
+            movie.availableCopies++;
+            console.log(`You have successfully returned ${title}. Thank you!`);
+        } else {
+            console.log(`Sorry, we do not recognize the movie title ${title}.`);
+        }
+    }
+}
+
+// Usage
+let store = new MovieStore();
+store.addMovie(new Movie('Inception', 3));
+store.addMovie(new Movie('Interstellar', 2));
+
+store.rentMovie('Inception');
+store.returnMovie('Inception');
