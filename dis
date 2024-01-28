@@ -1,0 +1,13 @@
+class MyClass {
+    static myStaticProperty = "Hello, World!";
+
+    static myStaticMethod() {
+        return "This is a static method!";
+    }
+}
+
+// Accessing the static property
+console.log(MyClass.myStaticProperty); // Outputs: Hello, World!
+
+// Calling the static method
+console.log(MyClass.myStaticMethod()); // Outputs: This is a static method!
